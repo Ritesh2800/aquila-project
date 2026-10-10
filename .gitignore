@@ -1,0 +1,32 @@
+# Environments & Secrets
+.env
+*.env
+backend/.env
+frontend/.env
+
+# Dependencies
+.venv/
+venv/
+node_modules/
+frontend/node_modules/
+backend/.venv/
+
+# Build artifacts
+dist/
+frontend/dist/
+
+# Storage, Models & Databases
+backend/data/
+*.sqlite
+*.sqlite3
+*.db
+Zero-DCE_extension/
+*.pt
+*.onnx
+
+# Python cache & OS files
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+

@@ -1,0 +1,113 @@
+/* Aquila night-watch glass design. Fonts: Bricolage Grotesque, IBM Plex Sans, IBM Plex Mono */
+html{color-scheme:dark;scrollbar-width:none;-ms-overflow-style:none}
+body{margin:0;background:#0B0F14;overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}
+*{box-sizing:border-box;scrollbar-width:none;-ms-overflow-style:none}
+::-webkit-scrollbar{display:none;width:0;height:0}
+*::-webkit-scrollbar{display:none;width:0;height:0}
+.app{display:flex;min-height:960px;background:#0B0F14;color:#E8EDF2;font:14px 'IBM Plex Sans',sans-serif}
+.side{flex:0 0 240px;padding:28px 18px;border-right:1px solid #1D2733;background:#0E141B;display:flex;flex-direction:column;gap:6px}
+.logo{display:flex;gap:10px;align-items:center;margin:0 0 26px 6px}.logo b{font:700 22px 'Bricolage Grotesque',sans-serif;display:block}.logo span{font-size:12px;color:#8A98A8}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:10px;color:#8A98A8;font:inherit;border:1px solid transparent;background:none;text-align:left}
+.nav.on{background:#1A2330;color:#fff;border-color:#2A3748}.nav.dis{opacity:.5}
+.badge{background:#FFB547;color:#1A1204;border-radius:20px;padding:1px 8px;font-size:12px;font-weight:600}
+.stat{margin-top:auto;display:flex;flex-direction:column;gap:8px;font-size:12px;color:#8A98A8;padding-left:6px}.stat i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3DD6B0;margin-right:8px}
+.main{flex:1;padding:32px 40px;min-width:0}.t1{font:700 34px 'Bricolage Grotesque',sans-serif;margin:0}.t2{font:600 18px 'Bricolage Grotesque',sans-serif;margin:0 0 14px}
+.muted{color:#8A98A8}.sub{margin:6px 0 26px}.mono{font-family:'IBM Plex Mono',monospace}
+.cols{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}.left{flex:1 1 340px;max-width:420px}.right{flex:3 1 480px;min-width:0}
+.card{background:#121922;border:1px solid #1F2A38;border-radius:16px;padding:22px}
+.drop{border:1.5px dashed #FFB547;border-radius:14px;padding:26px 16px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center;background:#0E141B;margin-bottom:10px}
+.file{display:flex;justify-content:space-between;background:#18212C;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:26px}
+.seg{display:flex;gap:4px;background:#0E141B;border:1px solid #1F2A38;border-radius:12px;padding:4px;margin-bottom:20px}.seg button{flex:1;padding:10px;border:0;border-radius:9px;background:none;color:#8A98A8;font:inherit}.seg .on{background:none;color:#fff}
+.row{display:flex;justify-content:space-between;margin-bottom:6px;color:#B7C2CF}.row b{color:#FFB547;font:500 14px 'IBM Plex Mono',monospace}
+.rng{width:100%;accent-color:#FFB547;margin:0 0 18px}
+.inp{width:100%;background:#0E141B;border:1px solid #2A3748;border-radius:10px;padding:12px;color:#fff;font:inherit;margin:6px 0 14px}
+.chk{display:flex;gap:10px;color:#8A98A8;font-size:13px;margin-bottom:18px}
+.btn{border:0;border-radius:12px;padding:14px 18px;font:600 15px 'IBM Plex Sans',sans-serif;cursor:pointer;color:#E8EDF2;background:#1F2B3A}.amber{background:#FFB547;color:#1A1204;width:100%}.red{background:#FF6B6B;color:#1A0606}.ghost{background:none;border:1px solid #2A3748}
+.rh{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}.rh h2{margin:0 auto 0 0}
+.chip{border:1px solid #2A3748;border-radius:20px;padding:3px 11px;font-size:12px;color:#B7C2CF}.chip.hot{border-color:#FF6B6B;color:#FF9A9A}
+.frame{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/8;background:repeating-linear-gradient(0deg,#0C1814 0 3px,#0A1511 3px 6px);border:1px solid #1F2A38}
+.hud{position:absolute;top:14px;font:500 12px 'IBM Plex Mono',monospace;color:#3DD6B0;display:flex;gap:8px;align-items:center}.tl{left:16px}.tr{right:16px}
+.rec{width:9px;height:9px;border-radius:50%;background:#FF6B6B;display:inline-block}
+.bx{position:absolute;border:2px solid;border-radius:4px}.bx em{position:absolute;top:-22px;left:-2px;font:500 11px 'IBM Plex Mono',monospace;font-style:normal;color:#06120E;padding:2px 6px;border-radius:4px;background:#3DD6B0;white-space:nowrap}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}.tile{flex:1 1 180px;background:#18212C;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px}.big{font:700 38px 'Bricolage Grotesque',sans-serif}
+.meter{position:relative;height:6px;background:#0E141B;border-radius:6px}.meter i{position:absolute;left:0;top:0;bottom:0;background:#FF6B6B;border-radius:6px}.meter u{position:absolute;top:-4px;width:2px;height:14px;background:#fff}
+.track{position:relative;height:8px;background:#18212C;border-radius:8px;margin:6px 0}.track s{position:absolute;top:-3px;width:14px;height:14px;border-radius:50%;background:#3DD6B0;text-decoration:none}.track s.h{background:#FF6B6B}
+.ticks{display:flex;justify-content:space-between;font-size:12px;margin-bottom:14px}
+.ev{display:flex;gap:14px;align-items:center;padding:10px 0;border-top:1px solid #1F2A38}.ev .mono{color:#8A98A8;width:50px}.ev span:nth-child(2){flex:1}
+.tabs{display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap}.tabs button{background:#121922;border:1px solid #1F2A38;border-radius:10px;padding:9px 16px;color:#8A98A8;font:inherit}.tabs .on{background:transparent;color:#fff;border-color:transparent}
+.acard{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid #1F2A38;border-radius:12px;background:#121922;margin-bottom:10px}.acard.sel{border-color:#FFB547;background:#1A2330}
+.th{width:84px;height:54px;border-radius:8px;background:#0A1511;position:relative;flex:none}.th i{position:absolute;border:2px solid #FF6B6B;border-radius:3px}
+.acard div:nth-child(2){flex:1}.acard b{display:block}.sc{font:600 15px 'IBM Plex Mono',monospace;color:#FF9A9A}
+.play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:#FFB547;display:flex;align-items:center;justify-content:center}
+.scrub{position:absolute;left:16px;right:16px;bottom:14px;height:5px;background:#26323F;border-radius:5px}.scrub i{display:block;width:38%;height:100%;background:#FFB547;border-radius:5px}
+.acts{display:flex;gap:12px;margin:18px 0;flex-wrap:wrap}.acts .red{flex:1 1 240px}
+.steps{display:flex;gap:8px}.steps div{flex:1;font-size:12px;color:#3DD6B0}.steps i{display:block;height:5px;border-radius:5px;background:#3DD6B0;margin-bottom:8px}
+@media(max-width:820px){.app{flex-direction:column}.side{flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid #1D2733}.logo{margin:0 12px 0 0}.stat{display:none}.main{padding:20px}}
+
+.app{flex-direction:column;position:relative;overflow-x:clip;background:#070A10;min-height:100vh}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px)}
+.bg i:nth-child(1){width:520px;height:520px;left:-120px;top:-140px;background:#FFB547;opacity:.30}
+.bg i:nth-child(2){width:620px;height:620px;right:-160px;top:220px;background:#3A5BFF;opacity:.32}
+.bg i:nth-child(3){width:480px;height:480px;left:28%;bottom:-220px;background:#1FD1A5;opacity:.24}
+.glass,.card,.tile,.acard,.drop,.seg,.inp,.file,.chip,.tabs button,.ghost{background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(255,255,255,.04),0 10px 34px rgba(0,0,0,.35)}
+.top{position:sticky;top:0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:18px 40px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:linear-gradient(180deg,rgba(7,10,16,0.85) 0%,rgba(7,10,16,0.4) 75%,rgba(7,10,16,0) 100%);transition:padding 0.25s ease}
+.pill{position:relative;display:flex;align-items:center;border-radius:999px}
+.pill::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.26),rgba(255,255,255,0) 38%,rgba(255,255,255,0) 62%,rgba(255,255,255,.10))}
+.pl{justify-self:start;gap:10px;padding:9px 24px 9px 14px}.pl b{font:700 20px 'Bricolage Grotesque',sans-serif}
+.pn{gap:4px;padding:6px;border-color:rgba(255,255,255,.22);position:relative}
+.pill-slider{position:absolute;top:6px;bottom:6px;left:0;border-radius:999px;background:rgba(255,181,71,.26);box-shadow:inset 0 0 0 1px rgba(255,181,71,.6),inset 0 1px 0 rgba(255,255,255,.4),0 4px 18px rgba(255,181,71,.25);transition:transform .32s cubic-bezier(0.25,1,0.5,1),width .32s cubic-bezier(0.25,1,0.5,1),opacity .2s ease;pointer-events:none;z-index:1}
+.tab{position:relative;z-index:2;border:0;background:none;color:#B7C2CF;border-radius:999px;padding:10px 24px;font:500 14px 'IBM Plex Sans',sans-serif;display:flex;gap:8px;align-items:center;cursor:pointer;transition:color .25s ease}
+.tab.on{color:#fff;background:transparent !important;box-shadow:none !important}
+.ps{justify-self:end;gap:14px;padding:12px 22px;font-size:12px;color:#C9D3DE}.ps i{width:8px;height:8px;border-radius:50%;background:#3DD6B0;box-shadow:0 0 10px #3DD6B0;margin-right:-6px}.ps u{width:1px;height:14px;background:rgba(255,255,255,.25)}
+.main{position:relative;z-index:1;padding:26px 40px 44px}
+.card{border-radius:28px}.tile{border-radius:18px}.frame{border-radius:20px}.acard{border-radius:20px}
+.btn{border-radius:999px}.amber{box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 8px 26px rgba(255,181,71,.4)}.red{box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 26px rgba(255,107,107,.35)}
+.ghost{color:#E8EDF2}
+.seg{border-radius:999px;position:relative}
+.seg-slider{position:absolute;top:4px;bottom:4px;left:0;border-radius:999px;background:rgba(255,181,71,.26);box-shadow:inset 0 0 0 1px rgba(255,181,71,.55);transition:transform .32s cubic-bezier(0.25,1,0.5,1),width .32s cubic-bezier(0.25,1,0.5,1),opacity .2s ease;pointer-events:none;z-index:1}
+.seg button{position:relative;z-index:2;border-radius:999px;cursor:pointer;background:transparent !important;border:0 !important;box-shadow:none !important;transition:color .25s ease}
+.seg .on,.seg button.on{background:transparent !important;border:0 !important;box-shadow:none !important;color:#fff !important}
+.drop{border:1.5px dashed rgba(255,181,71,.85);border-radius:24px;cursor:pointer}.inp{border-radius:999px;padding:12px 18px;color:#fff}.file{border-radius:999px;padding:10px 20px}
+.tabs{position:relative}
+.tabs-slider{position:absolute;top:0;bottom:0;left:0;border-radius:999px;border:1px solid rgba(255,181,71,.7);background:rgba(255,181,71,.2);box-shadow:inset 0 0 0 1px rgba(255,181,71,.4),0 4px 18px rgba(255,181,71,.2);transition:transform .32s cubic-bezier(0.25,1,0.5,1),width .32s cubic-bezier(0.25,1,0.5,1),opacity .2s ease;pointer-events:none;z-index:1}
+.tabs button{position:relative;z-index:2;border-radius:999px;cursor:pointer;transition:color .25s ease,border-color .25s ease,background-color .25s ease}
+.tabs .on,.tabs button.on{background:transparent !important;border-color:transparent !important;box-shadow:none !important;color:#fff !important}
+.acard.sel{border-color:rgba(255,181,71,.8);background:rgba(255,181,71,.10)}
+@media(max-width:820px){.top{grid-template-columns:1fr;justify-items:center;padding:14px;position:sticky;top:0}.pl,.ps{justify-self:center}.main{padding:20px}}
+
+/* Video and responsive media in .frame */
+.frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.acard{cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:2px solid #FFB547;outline-offset:2px}
+
+/* Inactive / pending Twilio call step indicator */
+.steps div.inactive{color:#8A98A8}
+.steps div.inactive i{background:rgba(255,255,255,.16)}
+
+/* Access Gate and Banner notifications */
+.gate{min-height:100vh;display:grid;place-items:center;padding:20px;position:relative;z-index:10}
+.gate .panel{width:min(420px,100%);display:flex;flex-direction:column;gap:14px;background:rgba(255,255,255,.06);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.16);border-radius:28px;padding:32px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
+.gate h1{font:700 28px 'Bricolage Grotesque',sans-serif;margin:0}
+.banner{border-radius:14px;padding:12px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.06);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.16);font-size:13px}
+.banner.error{border-color:rgba(255,107,107,.5);color:#FF9A9A}
+.banner.warn{border-color:rgba(255,181,71,.5);color:#FFD480}
+.banner.ok{border-color:rgba(61,214,176,.5);color:#3DD6B0}
+
+/* Danger score over time chart */
+.chart{width:100%;height:auto;cursor:crosshair;display:block;border-radius:14px;background:rgba(0,0,0,0.3);padding:8px 4px;border:1px solid rgba(255,255,255,0.1);margin-top:8px}
+.chart .grid{stroke:rgba(255,255,255,0.08);stroke-width:1}
+.chart .tick{fill:#8A98A8;font-size:11px;font-family:'IBM Plex Mono',monospace}
+.chart .area{fill:#FF6B6B;opacity:0.18}
+.chart .score{fill:none;stroke:#FF6B6B;stroke-width:2.2}
+.chart .bright{fill:none;stroke:#8A98A8;stroke-width:1.2;opacity:0.6;stroke-dasharray:4 2}
+.chart .thr{stroke:#FFB547;stroke-width:1.5;stroke-dasharray:6 4}
+.chart .trigger{stroke:#FFB547;stroke-width:1;opacity:0.7}
+.chart .trigger-dot{fill:#FFB547}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;color:#8A98A8;font-size:12px}
+.legend span{margin-left:auto;color:#8A98A8}
+.k{display:inline-block;width:14px;height:3px;margin-right:6px;vertical-align:middle;border-radius:2px}
+.k.score{background:#FF6B6B}
+.k.bright{background:#8A98A8}
+.k.thr{background:#FFB547}

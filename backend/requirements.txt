@@ -1,0 +1,12 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+ultralytics>=8.3
+torch
+opencv-python-headless
+numpy
+pandas
+requests
+imageio-ffmpeg
+python-dotenv
+twilio
