@@ -14,8 +14,16 @@ for _d in (VIDEOS_DIR, OUTPUTS_DIR, ALERTS_DIR):
     _d.mkdir(parents=True, exist_ok=True)
 
 CAMERA_NAME = os.getenv("AQUILA_CAMERA", "CAM-01 (demo)")
-OBJ_WEIGHTS = os.getenv("AQUILA_OBJ_WEIGHTS", "yolov8m.pt")
-POSE_WEIGHTS = os.getenv("AQUILA_POSE_WEIGHTS", "yolov8m-pose.pt")
+OBJ_WEIGHTS  = os.getenv("AQUILA_OBJ_WEIGHTS",  "yolo26x.pt")
+POSE_WEIGHTS = os.getenv("AQUILA_POSE_WEIGHTS", "yolo26x-pose.pt")
+
+# Learned fight classifier (.joblib produced by aquila_fight_classifier_training notebook)
+FIGHT_MODEL_PATH = os.getenv("AQUILA_FIGHT_MODEL", str(BACKEND_DIR / "aquila_fight_clf.joblib"))
+FIGHT_PROB_THR   = float(os.getenv("AQUILA_FIGHT_PROB_THR", "0.6"))   # smoothed prob threshold
+FIGHT_SMOOTH     = float(os.getenv("AQUILA_FIGHT_SMOOTH",   "0.6"))   # EMA weight for newest window
+
+# GPU half-precision (FP16): faster on CUDA, ignored on CPU
+USE_HALF = os.getenv("AQUILA_USE_HALF", "1") not in ("0", "false", "no")
 
 # Zero-DCE++ (cloned by setup.sh)
 ZD_DIR = Path(os.getenv("ZDCE_DIR", PROJECT_DIR / "Zero-DCE_extension" / "Zero-DCE++"))
@@ -29,7 +37,7 @@ DARK_ON, DARK_OFF = 60, 80
 FIGHT_SPEED = 2.5
 BUFFER_S = 8
 CUE_FRAMES = 8
-WEIGHTS = dict(weapon_near=0.50, weapon=0.25, fight=0.35, lying=0.15, hands_up=0.10)
+WEIGHTS = dict(weapon_near=0.50, weapon=0.25, fight=0.65, lying=0.15, hands_up=0.10)  # fight raised 0.35→0.65 so fight alone clears 0.6 threshold
 
 # ---- alert retention ----
 HOURS_UNCONFIRMED = 24

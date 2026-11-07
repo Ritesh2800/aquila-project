@@ -37,6 +37,10 @@ def _warmup():
             enhance.get_zdce()
         except Exception as e:           # the app still works without enhancement
             startup["error"] = str(e)
+        from fight import get_fight_bundle
+        _, fight_err = get_fight_bundle()
+        if fight_err:
+            startup["error"] = (startup["error"] + " " + fight_err).strip()
         startup["models_ready"] = True
     except Exception as e:
         startup["error"] = f"Model loading failed: {e}"

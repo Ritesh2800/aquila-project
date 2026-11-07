@@ -10,3 +10,5 @@ requests
 imageio-ffmpeg
 python-dotenv
 twilio
+scikit-learn
+joblib

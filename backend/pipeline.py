@@ -8,16 +8,19 @@ from datetime import datetime
 
 import cv2
 import numpy as np
+import torch
 
 import config
 import db
 import enhance
+from fight import FightDetector, get_fight_bundle
 from models import get_models
 from notify import tg_send
 from scoring import (AlertGate, L_WR, R_WR, danger_score, fight_like, hands_up, lying,
                      weapon_near_person)
 
 FONT = cv2.FONT_HERSHEY_SIMPLEX
+HALF = bool(config.USE_HALF and torch.cuda.is_available())   # FP16 only on CUDA
 
 
 def _ffmpeg():
@@ -79,6 +82,9 @@ def run_pipeline(video_path, out_path, conf=0.3, imgsz=640, enhance_mode="auto",
     obj_model.predictor = None     # reset tracker state so IDs start fresh for every video
     pose_model.predictor = None
     warnings = []
+    fight_bundle, fight_err = get_fight_bundle()
+    if fight_bundle is None:
+        warnings.append(fight_err)
     _ffmpeg()   # fail fast if ffmpeg is missing, before processing any frames
 
     if enhance_mode in ("on", "auto"):
@@ -92,6 +98,7 @@ def run_pipeline(video_path, out_path, conf=0.3, imgsz=640, enhance_mode="auto",
     if not cap.isOpened():
         raise RuntimeError("Cannot open the video. Try an .mp4 file.")
     fps = cap.get(cv2.CAP_PROP_FPS) or 25
+    fd = FightDetector(fight_bundle, fps) if fight_bundle else None   # None = old rule
     W = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     n_total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) or 0
@@ -131,9 +138,10 @@ def run_pipeline(video_path, out_path, conf=0.3, imgsz=640, enhance_mode="auto",
 
         # ---- step 2: detect objects, people, pose, tracking ----
         ro = obj_model.track(frame_in, persist=True, tracker="bytetrack.yaml", classes=obj_ids,
-                             conf=conf, imgsz=imgsz, verbose=False)[0]
+                             conf=conf, imgsz=imgsz, half=HALF, verbose=False)[0]
         rp = pose_model.track(frame_in, persist=True, tracker="bytetrack.yaml",
-                              conf=conf, imgsz=imgsz, verbose=False)[0]
+                              conf=conf, imgsz=imgsz, half=HALF, verbose=False)[0]
+        fight_p = fd.update(frame_i, fps, rp) if fd else 0.0
 
         weapon_boxes = []
         for b in ro.boxes:
@@ -197,7 +205,8 @@ def run_pipeline(video_path, out_path, conf=0.3, imgsz=640, enhance_mode="auto",
         # ---- step 3 and 4: score, then hold ----
         flags = dict(weapon=bool(weapon_boxes),
                      weapon_near=weapon_near_person(weapon_boxes, person_boxes),
-                     fight=fight_like(people, config.FIGHT_SPEED),
+                     fight=((fight_p >= config.FIGHT_PROB_THR) if fd
+                            else fight_like(people, config.FIGHT_SPEED)),
                      lying=any_lying, hands_up=any_hands_up)
         score = danger_score(flags)
         reasons = [k for k, v in flags.items() if v]
@@ -215,6 +224,8 @@ def run_pipeline(video_path, out_path, conf=0.3, imgsz=640, enhance_mode="auto",
             img[10:10 + ih, W - iw - 10:W - 10] = cv2.resize(frame, (iw, ih))
             cv2.putText(img, "original", (W - iw - 6, 10 + ih + 18), FONT, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
         draw_hud(img, score, gate.progress(t), hold_s, score_thr, reasons, enh_on)
+        if fd:
+            cv2.putText(img, f"fight prob {fight_p:.2f}", (10, 102), FONT, 0.55, (0, 165, 255), 2, cv2.LINE_AA)
         buf.append(cv2.resize(img, (cw, ch)))
         writer.write(img)
 
@@ -232,7 +243,8 @@ def run_pipeline(video_path, out_path, conf=0.3, imgsz=640, enhance_mode="auto",
                         f"{', '.join(reasons)} | awaiting human review", clip_path)
 
         series.append(dict(time_s=round(t, 2), score=round(score, 3),
-                           brightness=round(gray_mean, 1), enhanced=int(enh_on)))
+                           brightness=round(gray_mean, 1), enhanced=int(enh_on),
+                           fight_prob=round(fight_p, 3)))
         frame_i += 1
         if on_progress and frame_i % 5 == 0:
             on_progress(frame_i, total)
