@@ -6,15 +6,11 @@
 
 ## Dashboard / Screenshots
 
-Add your dashboard screenshots to `docs/screenshots/` and they will render here on GitHub.
-
 | View | Preview |
 |---|---|
-| Dashboard | ![Aquila dashboard](docs/screenshots/dashboard.png) |
-| Analysis / Job view | ![Aquila analysis view](docs/screenshots/analysis.png) |
-| Alerts | ![Aquila alerts view](docs/screenshots/alerts.png) |
-
-*If the images above don’t show yet, follow the “How to add screenshots to this README” section below.*
+| Dashboard | ![Aquila dashboard](docs/screenshots/aquila-dashboard.jpeg) |
+| Dashboard (alternate view) | ![Aquila dashboard alternate view](docs/screenshots/aquila-dash2.jpeg) |
+| Alerts | ![Aquila alerts](docs/screenshots/aquila-alert.jpeg) |
 
 ## Features
 
