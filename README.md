@@ -38,7 +38,7 @@ aquila-project/
 │   ├── package.json
 │   └── vite.config.js
 ├── docs/
-│   └── screenshots/         # Put README/dashboard screenshots here
+│   └── screenshots/         # Dashboard screenshots
 ├── .env.example
 ├── setup.sh
 ├── run_dev.sh
@@ -175,28 +175,6 @@ Scoring weights, thresholds, and retention settings are primarily in `backend/co
 | `GET /files/{kind}/{name}` | Serve output/alert media |
 
 Interactive docs (when running locally): `http://localhost:8000/docs`
-
-## How to add screenshots to this README (so they appear on GitHub)
-
-1. **Put image files in the repo** (recommended):
-   - Create/use the folder: `docs/screenshots/`
-   - Copy your screenshots there, for example:
-     - `docs/screenshots/dashboard.png`
-     - `docs/screenshots/analysis.png`
-     - `docs/screenshots/alerts.png`
-2. **Reference them in `README.md`** using relative paths:
-   ```md
-   ![Aquila dashboard](docs/screenshots/dashboard.png)
-   ```
-3. **Commit and push**:
-   ```bash
-   git add docs/screenshots README.md
-   git commit -m "Add dashboard screenshots to README"
-   git push
-   ```
-   GitHub renders the images automatically.
-
-**Alternative (GitHub web UI):** open the repository on GitHub, edit `README.md`, and drag-and-drop images into the editor. GitHub uploads them and inserts image URLs. This is quick, but storing screenshots in `docs/screenshots/` keeps them versioned with the project.
 
 ## Operational Notes
 
